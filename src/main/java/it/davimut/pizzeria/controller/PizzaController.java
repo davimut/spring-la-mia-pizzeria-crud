@@ -5,10 +5,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import it.davimut.pizzeria.model.PizzaModel;
 import it.davimut.pizzeria.repository.PizzaRepository;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
+
 
 
 
@@ -31,6 +37,20 @@ public class PizzaController {
 	 model.addAttribute("dettaglio", pizzaRepo.getReferenceById(id));
      return "pizzeria/dettaglio";
 }
+   @GetMapping("/create")
+   public String create(Model model) {
+	   model.addAttribute("pizza",new PizzaModel());
+       return "/pizzeria/create";
+   }
+   
+   @PostMapping("/create")
+   public String postMethodName(@RequestBody String entity) {
+       //TODO: process POST request
+       
+       return entity;
+   }
+   
+   
 }
 
 
