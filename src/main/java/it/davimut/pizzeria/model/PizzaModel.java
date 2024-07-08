@@ -6,6 +6,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 
 
 
@@ -17,6 +18,7 @@ public class PizzaModel {
 	@Column(name = "id")
     private Integer id;
 	
+	@NotBlank(message = "il nome della pizza è obbligatorio")
 	@Column(name = "nome", nullable = false, unique = true )
 	private String nome;
 	
