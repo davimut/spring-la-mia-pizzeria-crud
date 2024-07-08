@@ -7,12 +7,14 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 
 
 @Entity
 @Table(name = "pizza")
 public class PizzaModel {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
@@ -22,12 +24,14 @@ public class PizzaModel {
 	@Column(name = "nome", nullable = false, unique = true )
 	private String nome;
 	
+	@NotBlank(message = "la descrizione  della pizza è obbligatorio")
 	@Column(name = "descrizione", nullable = false )
 	private String descrizione;
 	
 	@Column(name = "foto_url", nullable = true )
 	private String fotoUrl;
 	
+	@NotNull(message= "il prezzo della pizza è obbligatorio")
 	@Column(name = "price", nullable = true )
     private double price;
     

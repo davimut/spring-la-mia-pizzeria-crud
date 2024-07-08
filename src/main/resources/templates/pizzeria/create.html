@@ -56,15 +56,24 @@
 						<div class="mb-3">
 							<label for="nome" class="form-label">Nome</label>
 							<input type="text" class="form-control" id="nome" placeholder="nome pizza">
+							
 							</div>
 							<div class="mb-3">
 								<label for="descrizione" class="form-label">Descrizione</label>
-								<input type="text" class="form-control" id="descrizione" placeholder="Descrizione pizza">
+								<textarea class="form-control" id="descrizione" placeholder="Descrizione pizza"></textarea>
 								</div>
 								<div class="mb-3">
 									<label for="prezzo" class="form-label">Prezzo</label>
 									<input type="number" class="form-control" id="prezzo" placeholder="Prezzo pizza">
+									<div th:if="${#fields.hasAnyErrors()}">
+										<ul>
+											<li th:each="err : ${#fields.allErrors()}" th:text="${err}">
+												Errore
+											</li>
+										</ul>
 									</div>
+									</div>
+									
 									<button type="submit" class="btn btn-primary">Salva</button>
 								</div>
 	

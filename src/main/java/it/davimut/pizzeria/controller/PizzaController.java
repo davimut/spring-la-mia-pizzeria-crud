@@ -4,10 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import it.davimut.pizzeria.model.PizzaModel;
 import it.davimut.pizzeria.repository.PizzaRepository;
+import jakarta.validation.Valid;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -46,9 +48,12 @@ public class PizzaController {
    }
    
    @PostMapping("/create")
-   public String store(@ModelAttribute ("pizza") PizzaModel pizza,
+   public String store(
+		   @Valid @ModelAttribute ("pizza") PizzaModel pizza,
 		   BindingResult bindingResult ) {
-	   if (bindingResult.hasErrors()) {
+	   if (pizza.getPrice() <= 0) {
+		   bindingResult.addError(new ObjectError("Errore di prezzo",
+				   "il prezzo della pizza è obbligatorio"));
 		   return "/pizzeria/create";
 	   }
 	   
